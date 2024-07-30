@@ -29,7 +29,7 @@ The data used in this application originates from Excel files. The CSV files (ce
 - Temperature Data: Sheet no: 6, Column No: 5
 - Time Data: Sheet no: 4, Column No: 11
 
-- Code for extracting is mentioned in `create_csv_file.ipynmb` file
+Code for extracting is mentioned in `create_csv_file.ipynmb` file
 
 ## Installation
 
