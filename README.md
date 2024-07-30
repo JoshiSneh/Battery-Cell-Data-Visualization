@@ -21,7 +21,7 @@ This Flask-based application provides a visual interface for monitoring battery 
 - `cell_5308.csv`, `cell_5329.csv`: CSV files containing raw battery cell data
 
 ## Data Source
-The data used in this application originates from Excel files. The CSV files (cell_5308.csv and cell_5329.csv) were created by extracting specific columns from these Excel files. Here's the mapping of the data:
+The data used in this application originates from Excel files (`5308.xls` and `5329.xls`). The CSV files (`cell_5308.csv` and `cell_5329.csv`) were created by extracting specific columns from these Excel files. Here's the mapping of the data:
 
 - Current Data: Sheet no: 4, Column No: 6
 - Voltage Data: Sheet no: 4, Column No: 7
