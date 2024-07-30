@@ -88,3 +88,4 @@ This project relies on the following main libraries:
 - SQLite3
 - Plotly
 - Pandas
+- Bootstrap for the UI
