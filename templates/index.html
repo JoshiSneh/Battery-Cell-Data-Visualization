@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Battery Dashboard</a>
+            <div class="navbar-nav">
+                <a class="nav-link text-white" href="api/cell_data/5308" id="cell-5308-link">Cell 5308</a>
+                <a class="nav-link text-white" href="api/cell_data/5329" id="cell-5329-link">Cell 5329</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="soh-5308-chart" class="soh-5308-chart"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="soh-5329-chart" class="soh-5329-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script type='text/javascript'>
+        var sohCharts = {{pie_charts|safe}};
+        Plotly.newPlot('soh-5308-chart', JSON.parse(sohCharts['5308']));
+        Plotly.newPlot('soh-5329-chart', JSON.parse(sohCharts['5329']));
+    </script>
+</body>
+</html>

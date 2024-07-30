@@ -1,0 +1,4 @@
+plotly==5.23.0
+nbformat==4.2.0
+Flask
+pandas
