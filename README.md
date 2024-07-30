@@ -1,6 +1,6 @@
-# Battery Monitoring Web Application
+# Battery Cell Data Visualization
 
-This Flask-based web application provides a visual interface for monitoring battery cell data, including State of Health (SoH) and various performance metrics over time. The application uses data stored in a SQLite database, which is populated from CSV files containing battery cell data.
+This Flask-based application provides a visual interface for monitoring battery cell data, including State of Health (SoH) and various performance metrics over time. The application uses data stored in a SQLite database, which is populated from CSV files containing battery cell data.
 
 ## Features
 
