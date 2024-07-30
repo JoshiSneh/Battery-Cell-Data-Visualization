@@ -8,7 +8,7 @@ This Flask-based web application provides a visual interface for monitoring batt
 - Visualize detailed cell data including voltage, temperature, current, and capacity over time
 - Interactive plots using Plotly
 - Data stored and retrieved from SQLite database
-- Automated data import from CSV files
+- Data import from CSV files
 
 ## Project Structure
 
@@ -24,14 +24,7 @@ This Flask-based web application provides a visual interface for monitoring batt
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/battery-monitoring.git
-   cd battery-monitoring
-   ```
-
-2. Create a virtual environment and activate it:
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   git clone https://github.com/yourusername/battery-monitoring.git](https://github.com/JoshiSneh/Battery-Cell-Data-Visualization.git
    ```
 
 3. Install the required packages:
