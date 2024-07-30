@@ -24,7 +24,7 @@ This Flask-based application provides a visual interface for monitoring battery 
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/battery-monitoring.git](https://github.com/JoshiSneh/Battery-Cell-Data-Visualization.git
+   git clone https://github.com/JoshiSneh/Battery-Cell-Data-Visualization.git
    ```
 
 3. Install the required packages:
