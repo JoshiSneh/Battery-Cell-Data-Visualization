@@ -23,11 +23,11 @@ This Flask-based application provides a visual interface for monitoring battery 
 ## Data Source
 The data used in this application originates from Excel files. The CSV files (cell_5308.csv and cell_5329.csv) were created by extracting specific columns from these Excel files. Here's the mapping of the data:
 
-Current Data: Sheet no: 4, Column No: 6
-Voltage Data: Sheet no: 4, Column No: 7
-Capacity Data: Sheet no: 4, Column No: 8
-Temperature Data: Sheet no: 6, Column No: 5
-Time Data: Sheet no: 4, Column No: 11
+- Current Data: Sheet no: 4, Column No: 6
+- Voltage Data: Sheet no: 4, Column No: 7
+- Capacity Data: Sheet no: 4, Column No: 8
+- Temperature Data: Sheet no: 6, Column No: 5
+- Time Data: Sheet no: 4, Column No: 11
 
 - Code for extracting is mentioned in `create_csv_file.ipynmb` file
 
