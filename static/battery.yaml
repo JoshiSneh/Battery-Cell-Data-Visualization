@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Battery Data API
+  description: API for retrieving battery cell data and State of Health (SoH) information
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /:
+    get:
+      summary: Get State of Health (SoH) for battery cells
+      description: Calculates the State of Health (SoH) for each cell and returns data for pie charts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with pie charts for each cell's SoH
+  /api/cell_data/{cell_id}:
+    get:
+      summary: Get battery data for a specific cell
+      description: Retrieves the battery data for a given cell_id and returns it as HTML with a scatter plot
+      parameters:
+        - in: path
+          name: cell_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the battery cell
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+                description: HTML page with scatter plot for the specified cell
+        '404':
+          description: Cell not found
+components:
+  schemas:
+    BatteryData:
+      type: object
+      properties:
+        timestamp:
+          type: array
+          items:
+            type: string
+            format: date-time
+        current:
+          type: array
+          items:
+            type: number
+            format: float
+        voltage:
+          type: array
+          items:
+            type: number
+            format: float
+        capacity:
+          type: array
+          items:
+            type: number
+            format: float
+        temperature:
+          type: array
+          items:
+            type: number
+            format: float

@@ -5,6 +5,9 @@ import os
 conn = sqlite3.connect('battery.db')
 cursor = conn.cursor()
 
+
+'''Creating the battery_data table'''
+
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS battery_data (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,6 +23,12 @@ CREATE TABLE IF NOT EXISTS battery_data (
 
 
 def import_csv(file_path, cell_id):
+    '''
+    This function reads a CSV file and imports the data into the database
+    INPUT: file_path: str, cell_id: int
+    OUTPUT: None
+    '''
+
     df = pd.read_csv(file_path)
     df['cell_id'] = cell_id
     df['timestamp'] = pd.to_datetime(df['Time'])
@@ -30,9 +39,10 @@ def import_csv(file_path, cell_id):
         'Capacity': 'capacity',
         'Temperature': 'temperature'
     })
+    
     df[['cell_id', 'record_index', 'current', 'voltage', 'capacity', 'temperature', 'timestamp']].to_sql('battery_data', conn, if_exists='append', index=False)
 
-# Import data from CSV files
+
 csv_files = ['cell_5308.csv', 'cell_5329.csv']
 
 for file in csv_files:
@@ -40,7 +50,7 @@ for file in csv_files:
     if os.path.exists(file):
         import_csv(file, cell_id)
 
-# Commit changes and close the connection
+
 conn.commit()
 conn.close()
 

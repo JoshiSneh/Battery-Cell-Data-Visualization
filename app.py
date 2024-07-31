@@ -1,14 +1,34 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template
 import sqlite3
 import plotly
 import plotly.graph_objects as go
-from datetime import datetime
+from flask_swagger_ui import get_swaggerui_blueprint
+
 from plotly.subplots import make_subplots
 import json
 
 app = Flask(__name__)
 
+
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+API_URL = '/static/battery.yaml'  
+
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    API_URL,
+    config={  # Swagger UI config overrides
+        'app_name': "Battery Data API"
+    },
+)
+
+# Register blueprint at URL
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
 def get_db_connection():
+    '''
+    This function returns a connection to the SQLite database
+    '''
     conn = sqlite3.connect('battery.db')
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
@@ -16,6 +36,10 @@ def get_db_connection():
 
 @app.get('/')
 def get_soh():
+    '''
+    This function calculates the State of Health (SoH) for each cell and renders a pie chart for each cell
+    OUTPUT: index.html page with pie charts
+    '''
     conn = get_db_connection()
     soh_data = {}
 
@@ -43,6 +67,11 @@ def get_soh():
     return render_template('index.html', pie_charts=pie_charts)
 
 def create_scatter_plot(result):
+    '''
+    This function creates a scatter plot with four subplots using plotly
+    INPUT: result: dict
+    OUTPUT: fig: plotly figure object
+    '''
     fig = make_subplots(rows=4, cols=1, shared_xaxes=True, vertical_spacing=0.05,subplot_titles=("Voltage vs Time", "Temperature vs Time","Current vs Time", "Capacity vs Time"))
 
     # Voltage vs Time
@@ -70,7 +99,7 @@ def create_scatter_plot(result):
     )
 
     fig.update_layout(
-        height=1400,  # Increased height to accommodate four subplots
+        height=1400,
         xaxis4_title="Time",
         yaxis_title="Voltage (V)",
         yaxis2_title="Temperature (°C)",
@@ -84,6 +113,11 @@ def create_scatter_plot(result):
 
 @app.get('/api/cell_data/<int:cell_id>')
 def get_cell_data(cell_id):
+    '''
+    This function retrieves the battery data for a given cell_id and returns it as a JSON object
+    INPUT: cell_id: int
+    OUTPUT: JSON object with battery data of different cells
+    '''
     cur = get_db_connection()
 
     data = cur.execute('''
@@ -94,7 +128,6 @@ def get_cell_data(cell_id):
     
     cur.close()
 
-    # Prepare the data for JSON serialization
     result = {
         'timestamp': [row['timestamp'] for row in data],
         'current': [row['current'] for row in data],
@@ -105,7 +138,6 @@ def get_cell_data(cell_id):
 
     fig = create_scatter_plot(result)
     
-
     scatter_plot = {}
     scatter_plot[cell_id] = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template(f'{cell_id}.html', scatter_plot=scatter_plot)
