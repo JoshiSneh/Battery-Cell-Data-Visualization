@@ -2,7 +2,9 @@
 
 This Flask-based application provides a visual interface for monitoring battery cell data, including State of Health (SoH) and various performance metrics over time. The application uses data stored in a SQLite database, which is populated from CSV files containing battery cell data.
 
-![Uploading battery_dashboard.gif…]()
+## Working 
+
+![battery_dashboard](https://github.com/user-attachments/assets/c21485a7-3fa7-487d-bea7-af0bd985c7fe)
 
 ## Features
 
