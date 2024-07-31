@@ -10,19 +10,19 @@ import json
 app = Flask(__name__)
 
 
-SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+SWAGGER_URL = '/api/docs'
 API_URL = '/static/battery.yaml'  
 
 
 swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    SWAGGER_URL,
     API_URL,
-    config={  # Swagger UI config overrides
+    config={
         'app_name': "Battery Data API"
     },
 )
 
-# Register blueprint at URL
+
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 def get_db_connection():
